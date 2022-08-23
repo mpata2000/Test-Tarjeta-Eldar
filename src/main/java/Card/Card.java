@@ -1,6 +1,7 @@
 package Card;
 
 import Card.Exceptions.NotValidCardBrand;
+import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Card {
@@ -38,6 +39,10 @@ public abstract class Card {
     }
     public abstract double serviceFee();
 
+    public String toJSON(){
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
     public boolean validOperation(int operationAmount) {
         return true;
     }

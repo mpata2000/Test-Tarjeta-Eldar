@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8791b653-3d1c-4fbe-89d9-fc7c6fa404c6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Card/Exceptions/NotValidCardBrand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CardTest.java" afterDir="false" />
     </list>

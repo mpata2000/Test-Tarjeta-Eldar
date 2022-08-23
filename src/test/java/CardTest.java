@@ -3,10 +3,12 @@ import Card.AmericanExpress;
 import Card.Exceptions.NotValidCardBrand;
 import Card.VisaCard;
 import Card.NaranjaCard;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import org.junit.jupiter.api.Test;
+import com.google.gson.JsonObject;
 
 
-import java.time.Year;
 import java.util.Calendar;
 
 import static Card.Card.MAX_FEE;
@@ -46,6 +48,23 @@ public class CardTest {
         Card card = Card.CardConstructor(5,"Martin","NARA","7/22");
         assertNotNull(card);
         assertTrue(card instanceof NaranjaCard);
+    }
+
+    @Test
+    public void CardInformationIsReadableAndCorrect(){
+        int number = 5;
+        String cardHolder = "Martin";
+        String cardBrand = "NARA";
+        String exp = "7/22";
+
+        Card card = Card.CardConstructor(number,cardHolder,cardBrand,exp);
+
+        JsonObject jsonObject = new Gson().fromJson(card.toJSON(), JsonObject.class);
+
+        assertEquals(number, jsonObject.get("cardNumber").getAsInt());
+        assertEquals(cardHolder, jsonObject.get("cardHolder").getAsString());
+        assertEquals(cardBrand, jsonObject.get("cardBrand").getAsString());
+        assertEquals(exp, jsonObject.get("cardExpirationDate").getAsString());
     }
 
 
