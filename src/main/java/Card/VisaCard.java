@@ -6,7 +6,7 @@ public class VisaCard extends Card {
     }
 
     @Override
-    public int serviceFee() {
+    public float serviceFee() {
         return 0;
     }
 

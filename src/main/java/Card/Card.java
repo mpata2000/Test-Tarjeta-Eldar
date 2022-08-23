@@ -29,7 +29,7 @@ public abstract class Card {
         this.cardExpirationDate = cardExpirationDate;
     }
 
-    public abstract int serviceFee();
+    public abstract float serviceFee();
 
     public boolean validOperation(int operationAmount) {
         return true;

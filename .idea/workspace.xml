@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8791b653-3d1c-4fbe-89d9-fc7c6fa404c6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/CardTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/AmericanExpress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/AmericanExpress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/NaranjaCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/NaranjaCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/VisaCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/VisaCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +48,16 @@
       <recent name="Card" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.CardTest">
+    <configuration name="CardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tarjeta-Eldar" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CardTest.CardCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Tarjeta-Eldar" />
       <option name="PACKAGE_NAME" value="" />
@@ -60,8 +68,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CardTest.VisaServiceFee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tarjeta-Eldar" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CardTest" />
+      <option name="METHOD_NAME" value="VisaServiceFee" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CardTest" />
+        <item itemvalue="JUnit.CardTest.VisaServiceFee" />
         <item itemvalue="JUnit.CardTest.CardCreate" />
       </list>
     </recent_temporary>

@@ -6,7 +6,7 @@ public class NaranjaCard extends Card {
     }
 
     @Override
-    public int serviceFee() {
+    public float serviceFee() {
         return 0;
     }
 }
