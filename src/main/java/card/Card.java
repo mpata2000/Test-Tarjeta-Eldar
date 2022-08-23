@@ -52,6 +52,18 @@ public abstract class Card {
         this.cardExpirationDate = cardExpirationDate;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return cardNumber == card.cardNumber &&
+                cardHolder.equals(card.cardHolder) &&
+                cardBrand.equals(card.cardBrand) &&
+                cardExpirationDate.equals(card.cardExpirationDate);
+    }
+
     protected double serviceFeeLimit(double fee){
         return Math.min(Math.max(fee,MIN_FEE),MAX_FEE);
     }

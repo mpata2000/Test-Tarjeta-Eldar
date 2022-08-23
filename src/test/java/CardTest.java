@@ -142,4 +142,24 @@ public class CardTest {
         assertEquals(Math.min(Math.max(dayOfMonth*0.5,MIN_FEE),MAX_FEE),card.serviceFee());
         assertTrue(0.3 <= card.serviceFee() && card.serviceFee() <= 5.0);
     }
+
+    @Test
+    public void CardWithEqualValuesAreEqual(){
+        Card card1 = Card.CardConstructor(5,"Martin","NARA","09/22");
+        Card card2 = Card.CardConstructor(5,"Martin","NARA","09/22");
+        assertEquals(card1,card2);
+    }
+
+    @Test
+    public void CardWithDifferentValuesAreNotEqual(){
+        Card card1 = Card.CardConstructor(5,"Martin","NARA","09/22");
+        Card card2 = Card.CardConstructor(45,"Martin Pata","AMEX","09/23");
+        assertNotEquals(card1,card2);
+    }
+
+    @Test
+    public void CardIsEqualToItself(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
+        assertEquals(card,card);
+    }
 }
