@@ -1,5 +1,6 @@
 import Card.Card;
 import Card.AmericanExpress;
+import Card.Exceptions.NotValidCardBrand;
 import Card.VisaCard;
 import Card.NaranjaCard;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,11 @@ public class CardTest {
         Card card = Card.CardConstructor(5,"Martin","VISA","7/22");
         assertNotNull(card);
         assertTrue(card instanceof VisaCard);
+    }
+
+    @Test
+    public void CardThowsNotValidBrandIfBRandIsntValid(){
+        assertThrows(NotValidCardBrand.class, ()->  Card.CardConstructor(5,"Martin","F1","7/22"));
     }
 
     @Test

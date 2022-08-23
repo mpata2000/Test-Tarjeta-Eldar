@@ -1,5 +1,7 @@
 package Card;
 
+import Card.Exceptions.NotValidCardBrand;
+
 public abstract class Card {
 
     public static final double MIN_FEE = 0.3;
@@ -12,7 +14,7 @@ public abstract class Card {
 
     public static Card CardConstructor(int cardNumber, String cardHolder, String cardBrand, String cardExpirationDate) {
         Card card = null;
-
+        cardBrand = cardBrand.toUpperCase();
         if (cardBrand.equals("VISA")) {
             card = new VisaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
         } else if (cardBrand.equals("NARA")) {
@@ -20,7 +22,7 @@ public abstract class Card {
         } else if (cardBrand.equals("AMEX")) {
             card = new AmericanExpress(cardNumber, cardHolder, cardBrand, cardExpirationDate);
         } else {
-            System.out.println("Invalid card brand");
+            throw new NotValidCardBrand();
         }
 
         return card;
