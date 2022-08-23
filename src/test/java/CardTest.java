@@ -1,18 +1,17 @@
-import Card.Card;
-import Card.AmericanExpress;
-import Card.Exceptions.NotValidCardBrand;
-import Card.VisaCard;
-import Card.NaranjaCard;
+import card.Card;
+import card.AmericanExpress;
+import card.Exceptions.NotValidCardBrand;
+import card.VisaCard;
+import card.NaranjaCard;
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import org.junit.jupiter.api.Test;
 import com.google.gson.JsonObject;
 
 
 import java.util.Calendar;
 
-import static Card.Card.MAX_FEE;
-import static Card.Card.MIN_FEE;
+import static card.Card.MAX_FEE;
+import static card.Card.MIN_FEE;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -20,32 +19,79 @@ public class CardTest {
 
     @Test
     public void CardCreateWithValidValuesCreatesACard(){
-        Card card = Card.CardConstructor(5,"Martin","AMEX","7/22");
+        Card card = Card.CardConstructor(5,"Martin","AMEX","07/22");
         assertNotNull(card);
     }
 
     @Test
+    public void CardNumberCanNotBeZero(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(0,"Martin","F1","07/22"));
+    }
+
+    @Test
+    public void CardNumberCanNotBeNegative(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(-10,"Martin","AMEX","07/22"));
+    }
+
+    @Test
+    public void CardHolderCanNotBeNull(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,null,"AMEX","07/22"));
+    }
+
+    @Test
+    public void CardHolderCanNotBeBlank(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"","AMEX","07/22"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"   ","AMEX","07/22"));
+    }
+
+    @Test
+    public void CardBrandCanNotBeNull(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x",null,"07/22"));
+    }
+
+    @Test
+    public void CardBrandCanNotBeBlank(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","","07/22"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","  ","07/22"));
+    }
+
+    @Test
+    public void ExperitionDateMustBeMonthYear(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","7/22"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX",""));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","07/224"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","11/07/24"));
+    }
+
+    @Test
+    public void ExperitionDateMustBeValid(){
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","13/22"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","00/22"));
+        assertThrows(IllegalArgumentException.class, ()->  Card.CardConstructor(10,"x","AMEX","-02/22"));
+    }
+
+    @Test
     public void AmexCardIsCreatedCorrectly(){
-        Card card = Card.CardConstructor(5,"Martin","AMEX","7/22");
+        Card card = Card.CardConstructor(5,"Martin","AMEX","07/22");
         assertNotNull(card);
         assertTrue(card instanceof AmericanExpress);
     }
 
     @Test
     public void VisaCardIsCreatedCorrectly(){
-        Card card = Card.CardConstructor(5,"Martin","VISA","7/22");
+        Card card = Card.CardConstructor(5,"Martin","VISA","07/22");
         assertNotNull(card);
         assertTrue(card instanceof VisaCard);
     }
 
     @Test
     public void CardThowsNotValidBrandIfBRandIsntValid(){
-        assertThrows(NotValidCardBrand.class, ()->  Card.CardConstructor(5,"Martin","F1","7/22"));
+        assertThrows(NotValidCardBrand.class, ()->  Card.CardConstructor(5,"Martin","F1","07/22"));
     }
 
     @Test
     public void NarajaCardIsCreatedCorrectly(){
-        Card card = Card.CardConstructor(5,"Martin","NARA","7/22");
+        Card card = Card.CardConstructor(5,"Martin","NARA","07/22");
         assertNotNull(card);
         assertTrue(card instanceof NaranjaCard);
     }
@@ -55,7 +101,7 @@ public class CardTest {
         int number = 5;
         String cardHolder = "Martin";
         String cardBrand = "NARA";
-        String exp = "7/22";
+        String exp = "07/22";
 
         Card card = Card.CardConstructor(number,cardHolder,cardBrand,exp);
 
@@ -70,7 +116,7 @@ public class CardTest {
 
     @Test
     public void AmexServiceFee(){
-        Card card = Card.CardConstructor(5,"Martin","AMEX","9/22");
+        Card card = Card.CardConstructor(5,"Martin","AMEX","09/22");
         double month = Calendar.getInstance().get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
 
         assertEquals(Math.min(Math.max(month*0.1,MIN_FEE),MAX_FEE),card.serviceFee());
@@ -79,7 +125,7 @@ public class CardTest {
 
     @Test
     public void VisaServiceFee(){
-        Card card = Card.CardConstructor(5,"Martin","VISA","9/22");
+        Card card = Card.CardConstructor(5,"Martin","VISA","09/22");
         Calendar cal = Calendar.getInstance();
         double year = cal.get(Calendar.YEAR);
         double month = cal.get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
@@ -90,7 +136,7 @@ public class CardTest {
 
     @Test
     public void NaraServiceFee(){
-        Card card = Card.CardConstructor(5,"Martin","NARA","9/22");
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
         double dayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
         assertEquals(Math.min(Math.max(dayOfMonth*0.5,MIN_FEE),MAX_FEE),card.serviceFee());

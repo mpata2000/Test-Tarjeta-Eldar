@@ -1,4 +1,4 @@
-package Card.Exceptions;
+package card.Exceptions;
 
 public class NotValidCardBrand extends RuntimeException {
 }

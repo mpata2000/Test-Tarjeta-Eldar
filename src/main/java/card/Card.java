@@ -1,8 +1,10 @@
-package Card;
+package card;
 
-import Card.Exceptions.NotValidCardBrand;
+import card.Exceptions.NotValidCardBrand;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Calendar;
 
 public abstract class Card {
 
@@ -17,6 +19,22 @@ public abstract class Card {
     public static Card CardConstructor(int cardNumber,@NotNull String cardHolder,@NotNull String cardBrand,@NotNull String cardExpirationDate) {
         Card card = null;
         cardBrand = cardBrand.toUpperCase();
+
+        // Card number validation
+        if (cardNumber <= 0) {
+            throw new IllegalArgumentException("Card number must be positive");
+        }
+
+        //No null or empty strings
+        if (cardHolder == null || cardHolder.isBlank() || cardBrand == null || cardBrand.isBlank()) {
+            throw new IllegalArgumentException("Card holder, card brand and card expiration date must not be null or empty");
+        }
+
+        // Validate car expiration date
+        if (!cardExpirationDate.matches("^(0[1-9]|1[0-2])[/]([0-9]{2})$")) {
+            throw new IllegalArgumentException("Card expiration date must be in the format MM/YY");
+        }
+        
         card = switch (cardBrand) {
             case "VISA" -> new VisaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
             case "NARA" -> new NaranjaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
@@ -43,8 +61,20 @@ public abstract class Card {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
+    private boolean isExpired() {
+        String[] date = cardExpirationDate.split("/");
+        int month = Integer.parseInt(date[0]);
+        int year = Integer.parseInt(date[1]);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        return currentYear > year || (currentYear == year && currentMonth > month);
+   
+    }
+
     public boolean validOperation(int operationAmount) {
-        return true;
+
+        return !this.isExpired() && (operationAmount < 1000);
     }
 
     public int operation() {
