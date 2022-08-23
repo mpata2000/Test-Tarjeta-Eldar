@@ -5,4 +5,9 @@ public class VisaCard extends Card {
         super(cardNumber, cardHolder, cardBrand, cardExpirationDate);
     }
 
+    @Override
+    public int serviceFee() {
+        return 0;
+    }
+
 }

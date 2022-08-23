@@ -22,7 +22,7 @@ public abstract class Card {
         return card;
     }
 
-    private Card(int cardNumber, String cardHolder, String cardBrand, String cardExpirationDate) {
+    protected Card(int cardNumber, String cardHolder, String cardBrand, String cardExpirationDate) {
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
         this.cardBrand = cardBrand;
