@@ -1,6 +1,7 @@
 package Card;
 
 import Card.Exceptions.NotValidCardBrand;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class Card {
 
@@ -12,18 +13,15 @@ public abstract class Card {
     private final String cardBrand;
     private final String cardExpirationDate;
 
-    public static Card CardConstructor(int cardNumber, String cardHolder, String cardBrand, String cardExpirationDate) {
+    public static Card CardConstructor(int cardNumber,@NotNull String cardHolder,@NotNull String cardBrand,@NotNull String cardExpirationDate) {
         Card card = null;
         cardBrand = cardBrand.toUpperCase();
-        if (cardBrand.equals("VISA")) {
-            card = new VisaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
-        } else if (cardBrand.equals("NARA")) {
-            card = new NaranjaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
-        } else if (cardBrand.equals("AMEX")) {
-            card = new AmericanExpress(cardNumber, cardHolder, cardBrand, cardExpirationDate);
-        } else {
-            throw new NotValidCardBrand();
-        }
+        card = switch (cardBrand) {
+            case "VISA" -> new VisaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
+            case "NARA" -> new NaranjaCard(cardNumber, cardHolder, cardBrand, cardExpirationDate);
+            case "AMEX" -> new AmericanExpress(cardNumber, cardHolder, cardBrand, cardExpirationDate);
+            default -> throw new NotValidCardBrand();
+        };
 
         return card;
     }
