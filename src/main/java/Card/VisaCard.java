@@ -8,12 +8,12 @@ public class VisaCard extends Card {
     }
 
     @Override
-    public float serviceFee() {
+    public double serviceFee() {
         Calendar cal = Calendar.getInstance();
-        float year = cal.get(Calendar.YEAR);
-        float month = cal.get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
+        double year = cal.get(Calendar.YEAR);
+        double month = cal.get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
 
-        return month/(year-2000);
+        return  serviceFeeLimit(month/(year-2000));
     }
 
 }

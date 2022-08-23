@@ -8,9 +8,9 @@ public class NaranjaCard extends Card {
     }
 
     @Override
-    public float serviceFee() {
-        float dayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    public double serviceFee() {
+        double dayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
-        return dayOfMonth*05;
+        return serviceFeeLimit(dayOfMonth*0.5);
     }
 }

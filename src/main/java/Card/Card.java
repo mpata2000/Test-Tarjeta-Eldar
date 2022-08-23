@@ -1,6 +1,10 @@
 package Card;
 
 public abstract class Card {
+
+    public static final double MIN_FEE = 0.3;
+    public static final double MAX_FEE = 5.0;
+
     private final int cardNumber;
     private final String cardHolder;
     private final String cardBrand;
@@ -29,7 +33,10 @@ public abstract class Card {
         this.cardExpirationDate = cardExpirationDate;
     }
 
-    public abstract float serviceFee();
+    protected double serviceFeeLimit(double fee){
+        return Math.min(Math.max(fee,MIN_FEE),MAX_FEE);
+    }
+    public abstract double serviceFee();
 
     public boolean validOperation(int operationAmount) {
         return true;

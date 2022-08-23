@@ -7,8 +7,10 @@
     <list default="true" id="8791b653-3d1c-4fbe-89d9-fc7c6fa404c6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/AmericanExpress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/AmericanExpress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/NaranjaCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/NaranjaCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Card/VisaCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card/VisaCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +58,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CardTest.AmexCardIsCreatedCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tarjeta-Eldar" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CardTest" />
+      <option name="METHOD_NAME" value="AmexCardIsCreatedCorrectly" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CardTest.CardCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Tarjeta-Eldar" />
       <option name="PACKAGE_NAME" value="" />
@@ -79,6 +91,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.CardTest" />
+        <item itemvalue="JUnit.CardTest.AmexCardIsCreatedCorrectly" />
         <item itemvalue="JUnit.CardTest.VisaServiceFee" />
         <item itemvalue="JUnit.CardTest.CardCreate" />
       </list>

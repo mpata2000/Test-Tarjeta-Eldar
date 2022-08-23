@@ -8,10 +8,10 @@ public class AmericanExpress extends Card {
     }
 
     @Override
-    public float serviceFee() {
-        float month = Calendar.getInstance().get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
+    public double serviceFee() {
+        double month = Calendar.getInstance().get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
 
-        return month*01;
+        return serviceFeeLimit(month*0.1);
     }
 
 
