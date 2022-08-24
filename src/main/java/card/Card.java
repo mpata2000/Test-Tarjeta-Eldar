@@ -1,7 +1,10 @@
 package card;
 
 import card.Exceptions.NotValidCardBrand;
+import card.exceptions.CardExpiredException;
+import card.exceptions.InvalidOperationException;
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
@@ -74,23 +77,35 @@ public abstract class Card {
         return gson.toJson(this);
     }
 
-    private boolean isExpired() {
+    public boolean isExpired() {
         String[] date = cardExpirationDate.split("/");
         int month = Integer.parseInt(date[0]);
         int year = Integer.parseInt(date[1]);
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR) % 100;
+        
         return currentYear > year || (currentYear == year && currentMonth > month);
    
     }
 
+    public boolean canOperate(){
+        return !this.isExpired();
+    }
+
     public boolean validOperation(int operationAmount) {
-
-        return !this.isExpired() && (operationAmount < 1000);
+        return !this.isExpired() && operationAmount < 1000;
     }
 
-    public int operation() {
-        return cardNumber;
+    public String operation(int operationAmount) {
+        // Validate operation amount
+        if(!this.validOperation(operationAmount)){
+            throw new InvalidOperationException();
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("cardBrand", this.cardBrand);
+        json.put("serviceFee", this.serviceFee());
+        json.put("operationAmount", operationAmount);
+        return json.toJSONString();
     }
-    
 }

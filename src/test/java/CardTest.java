@@ -3,6 +3,8 @@ import card.AmericanExpress;
 import card.Exceptions.NotValidCardBrand;
 import card.VisaCard;
 import card.NaranjaCard;
+import card.exceptions.CardExpiredException;
+import card.exceptions.InvalidOperationException;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import com.google.gson.JsonObject;
@@ -161,5 +163,61 @@ public class CardTest {
     public void CardIsEqualToItself(){
         Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
         assertEquals(card,card);
+    }
+
+    @Test
+    public void ExpiredCardCanNotOperate(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","06/22");
+        assertTrue(card.isExpired());
+        assertFalse(card.validOperation(100));
+
+        Card cardExpYear = Card.CardConstructor(5,"Martin","NARA","09/12");
+        assertTrue(cardExpYear.isExpired());
+        assertFalse(cardExpYear.validOperation(100));
+    }
+
+    @Test
+    public void ValidCardCanOperate100(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
+        assertFalse(card.isExpired());
+        assertTrue(card.validOperation(100));
+    }
+
+    @Test
+    public void ValidCardCantOperate1000(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
+        assertFalse(card.isExpired());
+        assertFalse(card.validOperation(1000));
+    }
+
+    @Test
+    public void ValidOperationReturnJSONWithInformation(){
+
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
+        JsonObject jsonObject = new Gson().fromJson(card.operation(100), JsonObject.class);
+
+        assertEquals("NARA", jsonObject.get("cardBrand").getAsString());
+        assertEquals(card.serviceFee(), jsonObject.get("serviceFee").getAsDouble());
+        assertEquals(100, jsonObject.get("operationAmount").getAsInt());
+    }
+
+    @Test
+    public void TryingToOperateWithExperiedCardThrowsException(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/19");
+        assertThrows(InvalidOperationException.class, ()-> card.operation(1000));
+    }
+
+    @Test
+    public void NotExperiedCardCanOperate(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/22");
+        assertFalse(card.isExpired());
+        assertTrue(card.canOperate());
+    }
+
+    @Test
+    public void ExperiedCardCanNotOperate(){
+        Card card = Card.CardConstructor(5,"Martin","NARA","09/12");
+        assertTrue(card.isExpired());
+        assertFalse(card.canOperate());
     }
 }

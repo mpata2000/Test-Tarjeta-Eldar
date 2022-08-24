@@ -13,7 +13,7 @@ public class VisaCard extends Card {
         double year = cal.get(Calendar.YEAR);
         double month = cal.get(Calendar.MONTH) + 1; // Calendar month is 0 base (january == 0)
 
-        return  serviceFeeLimit(month/(year-2000));
+        return  serviceFeeLimit(month/(year%100));
     }
 
 }
